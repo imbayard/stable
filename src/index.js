@@ -1,15 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styling/index.css';
-import App from './App';
 import reportWebVitals from './config/reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
+
+// Config
+import {config} from "./config/config.js";
+import CustomRouter from './config/CustomRouter.js';
+import { Amplify } from 'aws-amplify';
+
+Amplify.configure({
+    Auth: {
+        mandatorySignIn: true,
+        region: config.cognito.REGION,
+        userPoolId: config.cognito.USER_POOL_ID,
+        userPoolWebClientId: config.cognito.APP_CLIENT_ID
+    }
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <Router>
-            <App />
+            <CustomRouter />
       </Router>
   </React.StrictMode>
 );

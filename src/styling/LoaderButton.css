@@ -1,0 +1,29 @@
+.LoaderButton .spinning {
+    margin-right: 7px;
+    top: 2px;
+    animation: spin 1s infinite linear;
+  }
+
+  .LoaderButton {
+    background-color: #e0e0e0;
+    border: 0px;
+    height: 50%;
+    margin: auto;
+    width: 80%;
+    font-weight: bold;
+  }
+
+  .LoaderButton:hover {
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid #b0b0b0;
+  }
+
+  @keyframes spin {
+    from {
+      transform: scale(1) rotate(0deg);
+    }
+    to {
+      transform: scale(1) rotate(360deg);
+    }
+  }
