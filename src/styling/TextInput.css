@@ -1,0 +1,37 @@
+.text-input-wrapper {
+    margin-top: 1%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    font-size: large;
+}
+
+.text-input-wrapper div {
+    color: #495654;
+    background-color: #b0b0b0;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content:center;
+    border: 1px solid #e0e0e0;
+}
+
+.text-input-wrapper div p {
+    margin: auto;
+}
+
+.text-input {
+    height: 100%;
+    font-size: x-large;
+    text-align: center;
+    border: 0px;
+    background-color: #e0e0e0;
+}
+
+.text-input-password {
+    height: 100%;
+    font-size: x-large;
+    text-align: center;
+    border: 0px;
+    background-color: #e0e0e0;
+    -webkit-text-security: circle;
+}

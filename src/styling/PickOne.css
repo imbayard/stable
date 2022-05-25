@@ -1,0 +1,21 @@
+.pick-one-wrapper {
+    position: fixed;
+    top: 20vh;
+    left: 25vw;
+    width: 50vw;
+    height: 5vh;
+    display: block;
+}
+
+.pick-option {
+    border: 1px solid #e0e0e0;
+    float: left;
+    width: 10vw;
+    height: 5vh;
+}
+
+.pick-option:hover {
+    border-radius: 10px;
+    cursor: pointer;
+    border: 2px solid #b0b0b0;
+}
