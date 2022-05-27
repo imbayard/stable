@@ -1,0 +1,72 @@
+.ako-message-list {
+    position: fixed;
+    top: 15vh;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.ako-message {
+    position: relative;
+    top: 100%;
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid rgba(255,255,255,.75);
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: x-large;
+}
+
+/* Animation */
+.anim-typewriter{
+  animation: typewriter 4s steps(36) 1s 1 normal both,
+             blinkTextCursor 500ms steps(36) 10 normal;
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 16.25em;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
+}
+
+.ako-response-body {
+    position: fixed;
+    top: 25vh;
+    width: 80vw;
+    left: 10vw;
+}
+
+@keyframes waitToAppear {
+    from{width: 0px; height: 0px}
+    to{width: auto; height: auto;}
+}
+
+.ako-response-body .text-input-wrapper{
+    animation: waitToAppear 10s linear 1;
+}
+
+hr {
+    position: fixed;
+    top: 20vh;
+    width: 100vw;
+}
+
+.ako-back-next {
+    position: fixed;
+    top: 35vh;
+    width: 100vw;
+    display: grid;
+    height: 5vh;
+    grid-template-columns: 50% 50%;
+}
+
+.ako-back {
+    width: 50%;
+    margin-left: 50%;
+}
+
+.ako-next {
+     width: 50%;
+}
