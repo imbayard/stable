@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Welcome from "../pages/Welcome.js";
 import App from "../App.js";
-import AKOGettingToKnowYou from "../pages/AKOGettingToKnowYou";
+import {AKOIntroduction, AKOIdealBalanceProfile, AKOActualBalanceProfile} from "../pages/AKOGettingToKnowYou";
 import { Auth } from "aws-amplify";
 import { AppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 
 export default function CustomRouter() {
     const [isAuthenticated, userHasAuthenticated] = useState(false);
-    const [isAuthenticating, setIsAuthenticating] = useState(true);
 
     async function onLoad() {
         try {
@@ -27,7 +26,9 @@ export default function CustomRouter() {
             <Routes>
                 <Route path = '/' element={<App/>} />
                 <Route path='/welcome' element={<Welcome />} />
-                <Route path='/ako/getting-to-know-you' element={<AKOGettingToKnowYou />} />
+                <Route path='/ako/getting-to-know-you/introduce' element={<AKOIntroduction />} />
+                <Route path='/ako/getting-to-know-you/ideal-profile' element={<AKOIdealBalanceProfile />} />
+                <Route path='/ako/getting-to-know-you/actual-profile' element={<AKOActualBalanceProfile />} />
             </Routes>
         </AppContext.Provider>
     )

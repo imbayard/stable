@@ -29,10 +29,11 @@ export default function AKOMessage({
             </span>
             <span className="ako-back-next">
                 <span className="ako-back">
+                {textInputLabel === 'Name' ? <></> :
                     <LoaderButton
                         onClick={handleBack}
                         style={!validateForm() ? {display:'none'} : {fontWeight: 'bold'}}
-                    >Back</LoaderButton>
+                    >Back</LoaderButton> }
                 </span>
                 <span className="ako-next">
                     <LoaderButton
