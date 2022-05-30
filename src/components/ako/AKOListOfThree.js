@@ -1,16 +1,21 @@
-import TextInput from "../form/TextInput";
+import ListOfThree from "../form/ListOfThree";
 import LoaderButton from "../form/LoaderButton";
 
-export default function AKOMessage({
+export default function AKOListOfThree({
     message,
-    textInputLabel,
-    textInputValue,
-    handleTextInputChange,
+    firstInput,
+    secondInput,
+    thirdInput,
+    mainChangeHandler,
+    firstLabel,
+    secondLabel,
+    thirdLabel,
+    category,
     handleBack,
     handleNext
 }) {
     function validateForm() {
-        return textInputValue.length > 0;
+        return (firstInput.length > 0 && secondInput.length > 0 && thirdInput.length > 0);
     }
     return(
         <div>
@@ -21,20 +26,25 @@ export default function AKOMessage({
             </span>
             <hr />
             <span className="ako-response-body">
-                <TextInput
-                    label={textInputLabel}
-                    value={textInputValue}
-                    changeHandler={handleTextInputChange}
-                    id={textInputLabel}
-                />
+                <span className='ako-list-of-three-wrapper'>
+                    <ListOfThree
+                        first={firstInput}
+                        second={secondInput}
+                        third={thirdInput}
+                        mainChangeHandler={mainChangeHandler}
+                        firstLabel={firstLabel}
+                        secondLabel={secondLabel}
+                        thirdLabel={thirdLabel}
+                        category={category}
+                    />
+                </span>
             </span>
             <span className="ako-back-next">
                 <span className="ako-back">
-                {textInputLabel === 'Name' ? <></> :
                     <LoaderButton
                         onClick={handleBack}
                         style={!validateForm() ? {display:'none'} : {fontWeight: 'bold'}}
-                    >Back</LoaderButton> }
+                    >Back</LoaderButton>
                 </span>
                 <span className="ako-next">
                     <LoaderButton

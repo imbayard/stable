@@ -19,6 +19,7 @@ export default function UserAuthenticator({
             return (
                 <TextInput
                     label="Confirm Password"
+                    id="pass-confirm"
                     value={confirmPassword}
                     changeHandler={handleConfirmPasswordChange}
                 />
@@ -37,11 +38,13 @@ export default function UserAuthenticator({
             </span>
             <span className="login-body">
                 <TextInput
+                    id="email"
                     label="Email"
                     value={email}
                     changeHandler={handleEmailChange}
                 />
                 <TextInput
+                    id="password"
                     label="Password"
                     value={password}
                     changeHandler={handlePasswordChange}

@@ -41,7 +41,7 @@ hr {
 
 .ako-back-next {
     position: relative;
-    top: 45em;
+    top: 60em;
     width: 100vw;
     display: grid;
     height: 5vh;
@@ -89,4 +89,22 @@ hr {
     width: 100%;
     display: grid;
     grid-template-columns: auto auto auto auto auto;
+}
+
+.ako-five-lists-of-three-wrapper {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.list-of-three-wrapper {
+    float: left;
+    width: 49%;
+    margin-left: 0.5%;
+}
+
+.ako-list-of-three-wrapper {
+    display: block;
+    width: 200%;
+    height: 100%;
 }

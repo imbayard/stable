@@ -2,7 +2,10 @@ import "../styling/AkoInteraction.css";
 import React, { useState, useCallback } from "react";
 import AKOMessageTextInput from "../components/ako/AKOMessageTextInput";
 import AKOSortableInput from "../components/ako/AKOSortableInput";
+import AKOFiveListsOfThree from "../components/ako/AKOFiveListsOfThree";
+import AKOListOfThree from "../components/ako/AKOListOfThree";
 import { useNavigate } from "react-router-dom";
+import { useFormFields } from "../libs/hooksLib";
 
 export function AKOIntroduction() {
     const [name, setName] = useState("");
@@ -64,7 +67,7 @@ export function AKOActualBalanceProfile() {
         navigate('/ako/getting-to-know-you/ideal-profile');
     }, [navigate]);
     const handleNext = useCallback(event => {
-        navigate('/ako/getting-to-know-you/actual-profile');
+        navigate('/ako/getting-to-know-you/common-activities');
     }, [navigate]);
     return (
         <AKOSortableInput
@@ -75,4 +78,89 @@ export function AKOActualBalanceProfile() {
             handleNext={handleNext}
         />
     );
+}
+
+export function AKOCommonActivities() {
+    const navigate = useNavigate();
+    const handleBack = useCallback(event => {
+        navigate('/ako/getting-to-know-you/actual-profile');
+    }, [navigate]);
+    const handleNext = useCallback(event => {
+        navigate('/ako/getting-to-know-you/on-your-mind');
+    }, [navigate]);
+    const [mainFirst, mainFirstHandler] = useFormFields({
+        firstInput:"",
+        secondInput:"",
+        thirdInput:""
+    });
+    const [mainSecond, mainSecondHandler] = useFormFields({
+        firstInput:"",
+        secondInput:"",
+        thirdInput:""
+    })
+    const [mainThird, mainThirdHandler] = useFormFields({
+        firstInput:"",
+        secondInput:"",
+        thirdInput:""
+    })
+    const [mainFourth, mainFourthHandler] = useFormFields({
+        firstInput:"",
+        secondInput:"",
+        thirdInput:""
+    })
+    const [mainFifth, mainFifthHandler] = useFormFields({
+        firstInput:"",
+        secondInput:"",
+        thirdInput:""
+    })
+    return(
+        <AKOFiveListsOfThree
+            message="Now list bite-sized activities you do for each. Keep em general, i.e. 'Lift' instead of '5x5x5 bench press'"
+            mainFirst={mainFirst}
+            mainFirstChangeHandler={mainFirstHandler}
+            mainSecond={mainSecond}
+            mainSecondChangeHandler={mainSecondHandler}
+            mainThird={mainThird}
+            mainThirdChangeHandler={mainThirdHandler}
+            mainFourth={mainFourth}
+            mainFourthChangeHandler={mainFourthHandler}
+            mainFifth={mainFifth}
+            mainFifthChangeHandler={mainFifthHandler}
+            handleBack={handleBack}
+            handleNext={handleNext}
+            firstLabel="Light"
+            secondLabel="Challenging"
+            thirdLabel="Real Tough"
+        />
+    );
+}
+
+export function AKOOnYourMind() {
+        const navigate = useNavigate();
+        const handleBack = useCallback(event => {
+            navigate('/ako/getting-to-know-you/common-activities');
+        }, [navigate]);
+        const handleNext = useCallback(event => {
+            navigate('/ako/getting-to-know-you/on-your-mind');
+        }, [navigate]);
+        const [main, mainHandler] = useFormFields({
+            firstInput:"",
+            secondInput:"",
+            thirdInput:""
+        });
+        return(
+            <AKOListOfThree
+                message="Nice work! Now, is there anything that's been on your mind recently?"
+                firstInput={main.firstInput}
+                secondInput={main.secondInput}
+                thirdInput={main.thirdInput}
+                mainChangeHandler={mainHandler}
+                firstLabel="1"
+                secondLabel="2"
+                thirdLabel="3"
+                category="Looming Thoughts"
+                handleBack={handleBack}
+                handleNext={handleNext}
+            />
+        )
 }
