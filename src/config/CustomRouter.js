@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Welcome from "../pages/Welcome.js";
 import App from "../App.js";
-import {AKOIntroduction, AKOIdealBalanceProfile, AKOActualBalanceProfile, AKOCommonActivities, AKOOnYourMind, AKOOneHabit} from "../pages/AKOGettingToKnowYou";
+import AKOGettingToKnowYou from "../pages/AKOGettingToKnowYou";
 import { Auth } from "aws-amplify";
 import { AppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
@@ -26,13 +26,13 @@ export default function CustomRouter() {
             <Routes>
                 <Route path = '/' element={<App/>} />
                 <Route path='/welcome' element={<Welcome />} />
-                <Route path='/ako/getting-to-know-you/introduce' element={<AKOIntroduction />} />
-                <Route path='/ako/getting-to-know-you/ideal-profile' element={<AKOIdealBalanceProfile />} />
-                <Route path='/ako/getting-to-know-you/actual-profile' element={<AKOActualBalanceProfile />} />
-                <Route path='/ako/getting-to-know-you/common-activities' element={<AKOCommonActivities />} />
-                <Route path='/ako/getting-to-know-you/on-your-mind' element={<AKOOnYourMind />} />
-                <Route path='/ako/getting-to-know-you/good-habit' element={<AKOOneHabit habitType="good"/>} />
-                <Route path='/ako/getting-to-know-you/not-so-good-habit' element={<AKOOneHabit habitType="bad"/>} />
+                <Route path='/ako/getting-to-know-you/introduce' element={<AKOGettingToKnowYou page='introduce' />} />
+                <Route path='/ako/getting-to-know-you/ideal-profile' element={<AKOGettingToKnowYou page='ideal-profile' />} />
+                <Route path='/ako/getting-to-know-you/actual-profile' element={<AKOGettingToKnowYou page='actual-profile' />} />
+                <Route path='/ako/getting-to-know-you/common-activities' element={<AKOGettingToKnowYou page='common-activities' />} />
+                <Route path='/ako/getting-to-know-you/on-your-mind' element={<AKOGettingToKnowYou page='on-your-mind' />} />
+                <Route path='/ako/getting-to-know-you/good-habit' element={<AKOGettingToKnowYou page='good-habit' />} />
+                <Route path='/ako/getting-to-know-you/not-so-good-habit' element={<AKOGettingToKnowYou page='not-so-good-habit' />} />
             </Routes>
         </AppContext.Provider>
     )
