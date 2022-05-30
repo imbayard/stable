@@ -136,31 +136,71 @@ export function AKOCommonActivities() {
 }
 
 export function AKOOnYourMind() {
-        const navigate = useNavigate();
-        const handleBack = useCallback(event => {
-            navigate('/ako/getting-to-know-you/common-activities');
-        }, [navigate]);
-        const handleNext = useCallback(event => {
-            navigate('/ako/getting-to-know-you/on-your-mind');
-        }, [navigate]);
-        const [main, mainHandler] = useFormFields({
-            firstInput:"",
-            secondInput:"",
-            thirdInput:""
-        });
-        return(
-            <AKOListOfThree
-                message="Nice work! Now, is there anything that's been on your mind recently?"
-                firstInput={main.firstInput}
-                secondInput={main.secondInput}
-                thirdInput={main.thirdInput}
-                mainChangeHandler={mainHandler}
-                firstLabel="1"
-                secondLabel="2"
-                thirdLabel="3"
-                category="Looming Thoughts"
-                handleBack={handleBack}
-                handleNext={handleNext}
-            />
-        )
+    const navigate = useNavigate();
+    const handleBack = useCallback(event => {
+        navigate('/ako/getting-to-know-you/common-activities');
+    }, [navigate]);
+    const handleNext = useCallback(event => {
+        navigate('/ako/getting-to-know-you/good-habit');
+    }, [navigate]);
+    const [main, mainHandler] = useFormFields({
+        firstInput:"",
+        secondInput:"",
+        thirdInput:""
+    });
+    return(
+        <AKOListOfThree
+            message="Nice work! Now, is there anything that's been on your mind recently?"
+            firstInput={main.firstInput}
+            secondInput={main.secondInput}
+            thirdInput={main.thirdInput}
+            mainChangeHandler={mainHandler}
+            firstLabel="1"
+            secondLabel="2"
+            thirdLabel="3"
+            category="Looming Thoughts"
+            handleBack={handleBack}
+            handleNext={handleNext}
+         />
+    )
+}
+
+export function AKOOneHabit({
+    habitType
+}) {
+    var message, label, backUrl, nextUrl;
+    if(habitType === "good") {
+        message = "Thank you for sharing those thoughts. Now, what's a habit you do consistently that you're proud of?";
+        label = "Cool Habit";
+        backUrl = "/ako/getting-to-know-you/on-your-mind";
+        nextUrl = "/ako/getting-to-know-you/not-so-good-habit"
+    } else {
+        message = "Cool! Now what's a habit you do / don't do enough that you aren't so proud of?";
+        label = "Guilty Habit";
+        backUrl = "/ako/getting-to-know-you/good-habit";
+        nextUrl = "/ako/getting-to-know-you/not-so-good-habit"
+    }
+    const navigate = useNavigate();
+    const handleBack = useCallback(event => {
+        navigate(backUrl);
+    }, [navigate]);
+    const handleNext = useCallback(event => {
+        setHabit("");
+        navigate(nextUrl);
+    }, [navigate]);
+    const [habit, setHabit] = useState("");
+    const handleHabitChange = useCallback(event => {
+        event.preventDefault();
+        setHabit(event.target.value);
+    }, [setHabit])
+    return(
+        <AKOMessageTextInput
+            message={message}
+            textInputLabel={label}
+            textInputValue={habit}
+            handleTextInputChange={handleHabitChange}
+            handleBack={handleBack}
+            handleNext={handleNext}
+        />
+    );
 }
