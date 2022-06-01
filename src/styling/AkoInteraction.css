@@ -108,3 +108,8 @@ hr {
     width: 200%;
     height: 100%;
 }
+
+.ako-selectables {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}

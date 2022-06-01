@@ -199,7 +199,7 @@ export default function AKOGettingToKnowYou() {
 
     function AKOChooseMoods() {
         const backUrl ='not-so-good-habit';
-        const nextUrl = 'choose-moods';
+        const nextUrl = 'role-models';
         const [selectedMoods, setMoods] = useBooleanFields({
             scared: false,
             happy: false,
@@ -241,6 +241,37 @@ export default function AKOGettingToKnowYou() {
         )
     }
 
+    function AKORoleModels() {
+        const [main, mainHandler] = useFormFields({
+            firstInput:"",
+            secondInput:"",
+            thirdInput:""
+        });
+        function validateForm() {
+            return (main.firstInput.length > 0 && main.secondInput.length > 0 && main.thirdInput.length > 0);
+        }
+        return(
+            <AKOWrapper
+                message="Last question... who do you respect in this world?"
+                validateForm={validateForm}
+                setPage={handlePageChange}
+                backPage="choose-moods"
+                nextPage="role-models"
+            >
+                <AKOListOfThree
+                    firstInput={main.firstInput}
+                    secondInput={main.secondInput}
+                    thirdInput={main.thirdInput}
+                    mainChangeHandler={mainHandler}
+                    firstLabel="Role Model 1"
+                    secondLabel="Role Model 2"
+                    thirdLabel="Role Model 3"
+                    category="Role Models"
+                />
+            </AKOWrapper>
+        )
+    }
+
     function renderPage() {
          switch (page) {
              case "introduce":
@@ -258,7 +289,9 @@ export default function AKOGettingToKnowYou() {
              case "not-so-good-habit":
                  return(<AKOOneHabit habitType="bad" />);
              case "choose-moods":
-                 return(<AKOChooseMoods />)
+                 return(<AKOChooseMoods />);
+             case "role-models":
+                return(<AKORoleModels />);
          }
     }
 

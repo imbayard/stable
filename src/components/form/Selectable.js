@@ -1,3 +1,5 @@
+import "../../styling/Selectable.css";
+
 export default function Selectable({
     value,
     clickHandler,

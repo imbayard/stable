@@ -8,20 +8,17 @@ export default function AKOSelectMany({
     function validateForm() {
         return true;
     }
-    function renderFields() {
-        for (var key in selectables) {
-            return(
-                <Selectable
-                    value={key}
-                    clickHandler={handleSelectedChange}
-                    clicked={selectables[key]}
-                />
-            )
-        }
-    }
     return(
-        <>
-            {renderFields()}
-        </>
+        <span className='ako-selectables'>
+            {Object.keys(selectables).map((selectable) => {
+                 return(
+                     <Selectable
+                         value={selectable}
+                         clickHandler={handleSelectedChange}
+                         clicked={selectables[selectable]}
+                     />
+                 )
+            })}
+        </span>
     )
 }
