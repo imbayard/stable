@@ -5,16 +5,11 @@ import React, { useState } from "react";
 import {onError} from "../../libs/errorLib";
 
 export default function AKOSortableInput({
-    message,
     ranks,
     setRanks,
-    handleBack,
-    handleNext
+    newRanks,
+    setNewRanks
 }) {
-    function validateForm() {
-        return newRanks.length > 4;
-    }
-    const [newRanks, setNewRanks] = useState([]);
     const itemDropped = item => {
         const exists = newRanks.some(val => item === val);
         if(exists){
@@ -28,7 +23,7 @@ export default function AKOSortableInput({
             <span className='ako-sortable-input'>
                 {ranks.map((rank) => {
                     return(
-                        <SortableComponent dataId={rank}>
+                        <SortableComponent dataId={rank} key={rank}>
                             {rank}
                         </SortableComponent>
                     )
@@ -45,7 +40,7 @@ export default function AKOSortableInput({
                     <span className='ako-sortable-output'>
                         {newRanks.map((rank, index) =>{
                             return(
-                                    <button className='sortable-wrapper'>
+                                    <button className='sortable-wrapper' key={index}>
                                         {index+1}: {rank}
                                     </button>
                             )
@@ -56,30 +51,9 @@ export default function AKOSortableInput({
         )
     }
     return(
-        <div>
-            <span className="ako-header">
-            </span>
-            <span className="ako-message-list">
-                <p className="ako-message anim-typewriter">{message}</p>
-            </span>
-            <hr />
-            <span className="ako-response-body">
+        <>
                 <SortableElementWrapper />
                 <DropHereElementWrapper />
-            </span>
-            <span className="ako-back-next">
-                <span className="ako-back">
-                    <LoaderButton
-                        onClick={handleBack}
-                    >Back</LoaderButton>
-                </span>
-                <span className="ako-next">
-                    <LoaderButton
-                        onClick={handleNext}
-                        style={!validateForm() ? {display:'none'} : {fontWeight: 'bold'}}
-                    >Next</LoaderButton>
-                </span>
-            </span>
-        </div>
+        </>
     );
 }

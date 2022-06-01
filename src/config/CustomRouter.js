@@ -26,13 +26,7 @@ export default function CustomRouter() {
             <Routes>
                 <Route path = '/' element={<App/>} />
                 <Route path='/welcome' element={<Welcome />} />
-                <Route path='/ako/getting-to-know-you/introduce' element={<AKOGettingToKnowYou page='introduce' />} />
-                <Route path='/ako/getting-to-know-you/ideal-profile' element={<AKOGettingToKnowYou page='ideal-profile' />} />
-                <Route path='/ako/getting-to-know-you/actual-profile' element={<AKOGettingToKnowYou page='actual-profile' />} />
-                <Route path='/ako/getting-to-know-you/common-activities' element={<AKOGettingToKnowYou page='common-activities' />} />
-                <Route path='/ako/getting-to-know-you/on-your-mind' element={<AKOGettingToKnowYou page='on-your-mind' />} />
-                <Route path='/ako/getting-to-know-you/good-habit' element={<AKOGettingToKnowYou page='good-habit' />} />
-                <Route path='/ako/getting-to-know-you/not-so-good-habit' element={<AKOGettingToKnowYou page='not-so-good-habit' />} />
+                <Route path='/ako/getting-to-know-you' element={<AKOGettingToKnowYou />} />
             </Routes>
         </AppContext.Provider>
     )
