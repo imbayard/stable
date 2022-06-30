@@ -10,10 +10,10 @@ export default function AKOMessage({
     handleNext
 }) {
     function validateForm() {
+        console.log(textInputValue.length);
         return textInputValue.length > 0;
     }
     return(
-
                 <TextInput
                     label={textInputLabel}
                     value={textInputValue}

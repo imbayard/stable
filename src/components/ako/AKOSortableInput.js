@@ -7,16 +7,16 @@ import {onError} from "../../libs/errorLib";
 export default function AKOSortableInput({
     ranks,
     setRanks,
-    newRanks,
+    value,
     setNewRanks
 }) {
     const itemDropped = item => {
-        const exists = newRanks.some(val => item === val);
+        const exists = value.some(val => item === val);
         if(exists){
             onError(item + " is ranked already... sorry no duplicates.");
             return;
         }
-        setNewRanks([...newRanks, item]);
+        setNewRanks([...value, item]);
     };
     const SortableElementWrapper = () => {
         return (
@@ -38,7 +38,7 @@ export default function AKOSortableInput({
                 <DropTarget onItemDropped={itemDropped}>
                     <h3>Drag & Drop Here</h3>
                     <span className='ako-sortable-output'>
-                        {newRanks.map((rank, index) =>{
+                        {value.map((rank, index) =>{
                             return(
                                     <button className='sortable-wrapper' key={index}>
                                         {index+1}: {rank}

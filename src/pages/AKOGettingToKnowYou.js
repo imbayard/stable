@@ -7,20 +7,26 @@ import AKOListOfThree from "../components/ako/AKOListOfThree";
 import AKOSelectMany from "../components/ako/AKOSelectMany";
 import AKOWrapper from "../components/ako/AKOWrapper";
 import { useFormFields, useBooleanFields } from "../libs/hooksLib";
+import { useAppContext } from "../libs/contextLib";
 
 export default function AKOGettingToKnowYou() {
     const [page, handlePageChange] = useState("introduce");
-
+    const { userObject, setUserObject } = useAppContext();
     function AKOIntroduction() {
+        function validateForm() {
+            return name.length > 0;
+        }
         const [name, setName] = useState("");
         const handleNameChange = useCallback(event => {
             event.preventDefault();
             setName(event.target.value);
         }, [setName]);
-        function validateForm() {
-            return name.length > 0;
+        const handleUserObjectUpdate = value => {
+            setUserObject({
+                ...userObject,
+                name: value
+            });
         }
-
         return(
             <AKOWrapper
                 message="Hi, I'm Ako. What's your name?"
@@ -28,6 +34,8 @@ export default function AKOGettingToKnowYou() {
                 setPage={handlePageChange}
                 backPage="NONE"
                 nextPage="ideal-profile"
+                handleUserObjectUpdate={handleUserObjectUpdate}
+                childKey="value"
             >
                 <TextInput
                     label="Name"
@@ -39,7 +47,13 @@ export default function AKOGettingToKnowYou() {
         );
     }
 
-    function AKOBalanceProfile({message, backPage, nextPage}) {
+    function AKOBalanceProfile({message, backPage, nextPage, userObjectKey}) {
+        const handleUserObjectUpdate = value => {
+            setUserObject({
+                ...userObject,
+                [userObjectKey]: value
+            })
+        }
         const [ranks, setRanks] = useState(["Mind", "Body", "Friends", "Family", "Mindfulness"]);
         const [newRanks, setNewRanks] = useState([]);
         const handleRankChange = useCallback(newRanks => {
@@ -47,7 +61,7 @@ export default function AKOGettingToKnowYou() {
         }, [setRanks]);
         const handleNewRankChange = useCallback(newRanks => {
             setNewRanks(newRanks);
-        }, [setNewRanks])
+        }, [setNewRanks]);
         function validateForm() {
             return newRanks.length > 4;
         }
@@ -58,11 +72,13 @@ export default function AKOGettingToKnowYou() {
                 setPage={handlePageChange}
                 backPage={backPage}
                 nextPage={nextPage}
+                handleUserObjectUpdate={handleUserObjectUpdate}
+                childKey="value"
             >
                 <AKOSortableInput
                     ranks = {ranks}
                     setRanks = {handleRankChange}
-                    newRanks = {newRanks}
+                    value = {newRanks}
                     setNewRanks = {handleNewRankChange}
                 />
             </AKOWrapper>
@@ -70,6 +86,12 @@ export default function AKOGettingToKnowYou() {
     }
 
     function AKOCommonActivities() {
+        const handleUserObjectUpdate = value => {
+            setUserObject({
+                ...userObject,
+                commonActivities: value
+            })
+        }
         const [mainFirst, mainFirstHandler] = useFormFields({
             firstInput:"",
             secondInput:"",
@@ -105,6 +127,8 @@ export default function AKOGettingToKnowYou() {
                 setPage={handlePageChange}
                 backPage="actual-profile"
                 nextPage="on-your-mind"
+                handleUserObjectUpdate={handleUserObjectUpdate}
+                childKey="mainFirst"
             >
                 <AKOFiveListsOfThree
                     mainFirst={mainFirst}
@@ -126,6 +150,12 @@ export default function AKOGettingToKnowYou() {
     }
 
     function AKOOnYourMind() {
+        const handleUserObjectUpdate = value => {
+            setUserObject({
+                ...userObject,
+                thoughts: value
+            })
+        }
         const [main, mainHandler] = useFormFields({
             firstInput:"",
             secondInput:"",
@@ -141,6 +171,8 @@ export default function AKOGettingToKnowYou() {
                 setPage={handlePageChange}
                 backPage="common-activities"
                 nextPage="good-habit"
+                handleUserObjectUpdate={handleUserObjectUpdate}
+                childKey="list-of-three"
             >
                 <AKOListOfThree
                     firstInput={main.firstInput}
@@ -159,13 +191,19 @@ export default function AKOGettingToKnowYou() {
     function AKOOneHabit({
         habitType
     }) {
+        const handleUserObjectUpdate = value => {
+            setUserObject({
+                ...userObject,
+                [habitType]: value
+            })
+        }
         const [habit, setHabit] = useState("");
         const handleHabitChange = useCallback(event => {
             event.preventDefault();
             setHabit(event.target.value);
         }, [setHabit])
         var message, label, backUrl, nextUrl;
-        if(habitType === "good") {
+        if(habitType === "goodHabit") {
             message = "Thank you for sharing those thoughts. Now, what's a habit you do consistently that you're proud of?";
             label = "Cool Habit";
             backUrl = "on-your-mind";
@@ -186,6 +224,8 @@ export default function AKOGettingToKnowYou() {
                 setPage={handlePageChange}
                 nextPage={nextUrl}
                 backPage={backUrl}
+                handleUserObjectUpdate={handleUserObjectUpdate}
+                childKey='value'
             >
                 <TextInput
                     label={label}
@@ -200,6 +240,12 @@ export default function AKOGettingToKnowYou() {
     function AKOChooseMoods() {
         const backUrl ='not-so-good-habit';
         const nextUrl = 'role-models';
+        const handleUserObjectUpdate = value => {
+            setUserObject({
+                ...userObject,
+                moods: value
+            })
+        }
         const [selectedMoods, setMoods] = useBooleanFields({
             scared: false,
             happy: false,
@@ -232,6 +278,8 @@ export default function AKOGettingToKnowYou() {
                 setPage={handlePageChange}
                 nextPage={nextUrl}
                 backPage={backUrl}
+                handleUserObjectUpdate={handleUserObjectUpdate}
+                childKey='selectables'
             >
                 <AKOSelectMany
                     selectables={selectedMoods}
@@ -247,6 +295,12 @@ export default function AKOGettingToKnowYou() {
             secondInput:"",
             thirdInput:""
         });
+        const handleUserObjectUpdate = value => {
+            setUserObject({
+                ...userObject,
+                roleModels: value
+            })
+        }
         function validateForm() {
             return (main.firstInput.length > 0 && main.secondInput.length > 0 && main.thirdInput.length > 0);
         }
@@ -257,6 +311,8 @@ export default function AKOGettingToKnowYou() {
                 setPage={handlePageChange}
                 backPage="choose-moods"
                 nextPage="role-models"
+                handleUserObjectUpdate={handleUserObjectUpdate}
+                childKey="list-of-three"
             >
                 <AKOListOfThree
                     firstInput={main.firstInput}
@@ -272,22 +328,28 @@ export default function AKOGettingToKnowYou() {
         )
     }
 
+    function AKOGettingToKnowYouReview() {
+
+    }
+
     function renderPage() {
          switch (page) {
              case "introduce":
                  return (<AKOIntroduction />);
              case "ideal-profile":
-                 return(<AKOBalanceProfile message="Nice to meet you! Please rank the below categories in order of importance to you. (Left is most important)" backPage="introduce" nextPage="actual-profile"/>);
+                var userName = userObject.name;
+                const msg = "Nice to meet you, " + userName + "! Please rank these in order of importance to you.";
+                return(<AKOBalanceProfile message={msg} backPage="introduce" nextPage="actual-profile" userObjectKey="idealBalanceProfile"/>);
              case "actual-profile":
-                 return(<AKOBalanceProfile message="Schweet, now rank them by which category you engage most often (be honest, this is for nobody but you)" backPage="ideal-profile" nextPage="common-activities"/>);
+                 return(<AKOBalanceProfile message="Schweet, now rank them by which category you engage most often (be honest, this is for nobody but you)" backPage="ideal-profile" nextPage="common-activities" userObjectKey="actualBalanceProfile"/>);
              case "common-activities":
                  return(<AKOCommonActivities />);
              case "on-your-mind":
                  return(<AKOOnYourMind />);
              case "good-habit":
-                 return(<AKOOneHabit habitType="good" />);
+                 return(<AKOOneHabit habitType="goodHabit" />);
              case "not-so-good-habit":
-                 return(<AKOOneHabit habitType="bad" />);
+                 return(<AKOOneHabit habitType="badHabit" />);
              case "choose-moods":
                  return(<AKOChooseMoods />);
              case "role-models":

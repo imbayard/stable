@@ -6,6 +6,8 @@ export default function AKOWrapper({
     setPage,
     backPage,
     nextPage,
+    handleUserObjectUpdate,
+    childKey,
     ...props
 }) {
     function handleBack() {
@@ -13,6 +15,24 @@ export default function AKOWrapper({
     }
     function handleNext() {
         setPage(nextPage);
+        console.log(props.children.props);
+        if(childKey === 'mainFirst') {
+            const submittedObject = props.children.props;
+            const updateObject={
+                mainFirst: submittedObject.mainFirst,
+                mainSecond: submittedObject.mainSecond,
+                mainThird: submittedObject.mainThird,
+                mainFourth: submittedObject.mainFourth,
+                mainFifth: submittedObject.mainFifth
+            };
+            handleUserObjectUpdate(updateObject);
+        } else if(childKey === 'list-of-three') {
+            const submittedObject = props.children.props;
+            const updateObject=[submittedObject.firstInput, submittedObject.secondInput, submittedObject.thirdInput];
+            handleUserObjectUpdate(updateObject);
+        } else {
+            handleUserObjectUpdate(props.children.props[childKey]);
+        }
     }
     return(
         <div>
