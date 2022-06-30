@@ -43,30 +43,30 @@ export default function Welcome() {
     }, [email, password, confirmPassword, authMode]);
 
     async function handleSubmit(event) {
-      event.preventDefault();
-      setIsLoading(true);
-      if(authMode === 'Log In') {
-          try {
-            await Auth.signIn(email, password);
-            userHasAuthenticated(true);
-            navigate('/')
-          } catch (e) {
-            onError(e);
-            setIsLoading(false);
-          }
-      } else {
-          try {
-            const newUser = await Auth.signUp({
-              username: email,
-              password: password,
-            });
-            setIsLoading(false);
-            setNewUser(newUser);
-          } catch (e) {
-            onError(e);
-            setIsLoading(false);
-          }
-      }
+        event.preventDefault();
+        setIsLoading(true);
+        if(authMode === 'Log In') {
+            try {
+              await Auth.signIn(email, password);
+              userHasAuthenticated(true);
+              navigate('/')
+            } catch (e) {
+              onError(e);
+              setIsLoading(false);
+            }
+        } else {
+            try {
+              const newUser = await Auth.signUp({
+                username: email,
+                password: password,
+              });
+              setIsLoading(false);
+              setNewUser(newUser);
+            } catch (e) {
+              onError(e);
+              setIsLoading(false);
+            }
+        }
     }
 
     async function handleConfirmationSubmit() {
@@ -122,7 +122,7 @@ export default function Welcome() {
                     validateForm = {validateForm}
                     handleSubmit = {handleSubmit}
                 />
-             :
+            :
                 <CodeConfirmation
                     email={email}
                     confirmationCode={confirmationCode}

@@ -1,14 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Welcome from "../pages/Welcome.js";
 import App from "../App.js";
+import AKOGettingToKnowYou from "../pages/AKOGettingToKnowYou";
 import { Auth } from "aws-amplify";
 import { AppContext } from "../libs/contextLib";
 import { onError } from "../libs/errorLib";
 
 export default function CustomRouter() {
     const [isAuthenticated, userHasAuthenticated] = useState(false);
-    const [isAuthenticating, setIsAuthenticating] = useState(true);
+    const [userObject, setUserObject] = useState({
+           customerId: "",
+           name: "",
+           idealBalanceProfile: [],
+           actualBalanceProfile: [],
+           commonActivities: {
+             mind: [],
+             body: [],
+             friends: [],
+             family: [],
+             mindfulness: []
+           },
+           thoughts: [],
+           goodHabit: "",
+           notSoGoodHabit: "",
+           roleModels: [],
+           moods: {}
+    });
 
     async function onLoad() {
         try {
@@ -22,10 +40,11 @@ export default function CustomRouter() {
     }
 
     return(
-        <AppContext.Provider value={{isAuthenticated, userHasAuthenticated}}>
+        <AppContext.Provider value={{isAuthenticated, userHasAuthenticated, userObject, setUserObject}}>
             <Routes>
                 <Route path = '/' element={<App/>} />
                 <Route path='/welcome' element={<Welcome />} />
+                <Route path='/ako/getting-to-know-you' element={<AKOGettingToKnowYou />} />
             </Routes>
         </AppContext.Provider>
     )

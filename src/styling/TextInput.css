@@ -1,7 +1,7 @@
 .text-input-wrapper {
     margin-top: 1%;
     display: grid;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 25% 75%;
     font-size: large;
 }
 

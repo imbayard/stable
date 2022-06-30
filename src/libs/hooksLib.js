@@ -8,8 +8,22 @@ export function useFormFields(initialState) {
     function(event) {
       setValues({
         ...fields,
-        [event.target.id]: event.target.value
+        [event.target.name]: event.target.value
       });
     }
   ];
+}
+
+export function useBooleanFields(initialState) {
+    const [fields, setValues] = useState(initialState);
+
+    return [
+        fields,
+        function(event) {
+            setValues({
+                ...fields,
+                [event.target.id]: (event.target.selected === true) ? false : true
+            });
+        }
+    ];
 }
